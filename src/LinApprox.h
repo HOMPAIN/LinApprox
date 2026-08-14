@@ -106,7 +106,45 @@ private:
     }
 };
 
-// Обёртка для удобного использования с 4 переменными, y = a*x1+b*x2*c*x3*d*x4
+
+// Обёртка для удобного использования с 2 переменными, y = a*x1 + b*x2
+class LinApprox4 : public LinApprox<4>
+{
+public:
+    void Add(double y, double x1, double x2, double x3)
+    {
+        double x[2] = { x1, x2};
+        LinApprox<2>::Add(y, x);
+    }
+
+    void Calc(double& A, double& B, double& C)
+    {
+        double coeffs[2];
+        LinApprox<2>::Calc(coeffs);
+        A = coeffs[0];
+        B = coeffs[1];
+    }
+};
+// Обёртка для удобного использования с 3 переменными, y = a*x1 + b*x2 + c*x3
+class LinApprox4 : public LinApprox<4>
+{
+public:
+    void Add(double y, double x1, double x2, double x3)
+    {
+        double x[3] = { x1, x2, x3 };
+        LinApprox<3>::Add(y, x);
+    }
+
+    void Calc(double& A, double& B, double& C)
+    {
+        double coeffs[3];
+        LinApprox<3>::Calc(coeffs);
+        A = coeffs[0];
+        B = coeffs[1];
+        C = coeffs[2];
+    }
+};
+// Обёртка для удобного использования с 4 переменными, y = a*x1 + b*x2 + c*x3 + d*x4
 class LinApprox4 : public LinApprox<4>
 {
 public:
